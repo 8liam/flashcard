@@ -7,6 +7,12 @@ export default function Navbar() {
                 </a>
                 <div className="flex space-x-4">
                     <a
+                        href="/flashcards"
+                        className="hover:bg-white hover:text-black bg-accent duration-300 px-3 py-2 rounded"
+                    >
+                        My FlashCards
+                    </a>
+                    <a
                         href="/create"
                         className="hover:bg-white hover:text-black bg-accent duration-300 px-3 py-2 rounded"
                     >
