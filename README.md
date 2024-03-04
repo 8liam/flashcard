@@ -22,7 +22,7 @@
 <ul>
   <li>[X] Responsive UI</li>
   <li>[ ] Complete Onboarding Page</li>
-  <li>[ ] Build Out User-Friendly FlashCard Creation</li>
+  <li>[X] Build Out User-Friendly FlashCard Creation</li>
   <li>[ ] Make UI more friendly and appealing for users to have a better experience.</li>
 </ul>
 
