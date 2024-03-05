@@ -1,6 +1,6 @@
 <h1>FlashCards</h1>
 
-<p>A study tool for memorisation of topics.</p>
+<p>A study tool for memorisation of topics through the classic FlashCard method. But easy.</p>
 
 <h2>Tech Stack</h2>
 
@@ -14,16 +14,24 @@
 
 <h3>MVP</h3>
 <ul>
-<li>[ ] Allow for Quiz Creation through create page.</li>
-<li>[ ] Open a Quiz and test knowledge.</li>
+<li>[X] Allow for FlashCard Creation through create page.</li>
+<li>[X] Open a FlashCard and test knowledge.</li>
+</ul>
+
+<h3>Features</h3>
+<ul>
+  <li>[X] Responsive UI</li>
+  <li>[X] User-Friendly FlashCard Creation</li>
+  <li>[X] FlashCards Saved to Local Storage</li>
+  <li>[X] Traversal through FlashCards.</li>
+  <li>[ ] Make UI more friendly and appealing for users to have a better experience.</li>
 </ul>
 
 <h3>Planned Features</h3>
 <ul>
-  <li>[X] Responsive UI</li>
   <li>[ ] Complete Onboarding Page</li>
-  <li>[X] Build Out User-Friendly FlashCard Creation</li>
   <li>[ ] Make UI more friendly and appealing for users to have a better experience.</li>
+  <li>[ ] Ability to Import questions through JSON</li>
 </ul>
 
 <!--
