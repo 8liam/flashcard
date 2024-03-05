@@ -16,7 +16,7 @@ export default function Navbar() {
                         href="/create"
                         className="hover:bg-white hover:text-black bg-accent duration-300 px-3 py-2 rounded"
                     >
-                        Create
+                        Create FlashCards
                     </a>
                 </div>
             </div>
