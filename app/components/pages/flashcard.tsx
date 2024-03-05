@@ -1,10 +1,16 @@
 "use client"
 import { useEffect, useState } from "react";
 
-export default function FlashCard({ id }: { id: number }) {
+export default function FlashCard({ id }: { id: string }) {
+    interface Question {
+        Question: string;
+        Answer: string;
+    }
+
     interface FlashcardSet {
+        id: string;
         title: string;
-        questions: { Question: string, Answer: string }[];
+        questions: Question[];
     }
 
     const [flashcardSet, setFlashcardSet] = useState<FlashcardSet | null>(null);
@@ -13,17 +19,28 @@ export default function FlashCard({ id }: { id: number }) {
 
     useEffect(() => {
         const loadFlashCardSet = () => {
-            const keys = JSON.parse(localStorage.getItem('flashcardKeys') || '[]');
-            if (id < keys.length) {
-                const key = keys[id];
-                const flashCardsStr = localStorage.getItem(key);
-                const set = flashCardsStr ? JSON.parse(flashCardsStr) : null;
-                setFlashcardSet(set);
-            }
+            const flashCardStr = localStorage.getItem(id);
+            const set = flashCardStr ? JSON.parse(flashCardStr) : null;
+            setFlashcardSet(set);
         };
 
         loadFlashCardSet();
     }, [id]);
+
+    useEffect(() => {
+        const handleKeyPress = (e: KeyboardEvent) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                toggleFlip();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyPress);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyPress);
+        };
+    }, [isFlipped]);
 
     const toggleFlip = () => {
         setIsFlipped(!isFlipped);
@@ -32,14 +49,15 @@ export default function FlashCard({ id }: { id: number }) {
     const nextCard = () => {
         if (flashcardSet && currentQuestionIndex < flashcardSet.questions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
-            setIsFlipped(false); // Reset flip status when moving to the next card
+            setIsFlipped(false);
+
         }
     };
 
     const previousCard = () => {
         if (currentQuestionIndex > 0) {
             setCurrentQuestionIndex(currentQuestionIndex - 1);
-            setIsFlipped(false); // Reset flip status when moving to the previous card
+            setIsFlipped(false);
         }
     };
 
@@ -58,24 +76,24 @@ export default function FlashCard({ id }: { id: number }) {
             <div onClick={toggleFlip} className={`${cardBackgroundClass} min-h-[30vh] text-center flex justify-center items-center cursor-pointer transition-colors duration-300`}>
                 <h1 className="text-2xl">{content}</h1>
             </div>
-            <div className="grid grid-cols-1 text-center">
+            <div className="text-center">
                 <p>Card {currentQuestionIndex + 1} of {flashcardSet.questions.length}</p>
-                <div className="w-full h-2 mt-4 bg-accent rounded">
-                    <div
-                        className="h-full bg-red-400 rounded"
-                        style={{
-                            width: `${(currentQuestionIndex / (flashcardSet.questions.length - 1)) * 100}%`,
-                        }}
-                    />
-                </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-4">
                 <button onClick={previousCard} className="bg-accent p-2 duration-300 rounded hover:bg-black border border-white">
                     Previous Card
+                </button>
+                <button onClick={toggleFlip} className="bg-accent p-2 duration-300 rounded hover:bg-black border border-white">
+                    Flip Card
                 </button>
                 <button onClick={nextCard} className="bg-accent p-2 duration-300 rounded hover:bg-black border border-white">
                     Next Card
                 </button>
+            </div>
+            <div className="grid grid-cols-1 gap-4 text-center">
+                <a href={`/edit/${id}`} className="bg-accent p-2 duration-300 rounded hover:bg-black border border-white">
+                    Update FlashCard
+                </a>
             </div>
         </main>
     );

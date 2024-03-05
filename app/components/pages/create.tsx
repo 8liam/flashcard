@@ -32,27 +32,26 @@ export default function Create() {
             alert("Please fill in all fields before saving.");
             return;
         }
+        const generateUniqueId = () => `flashcard-${Date.now()}`;
+
+        const id = generateUniqueId();
 
         const flashCards = {
+            id: id,
             title: topic,
             questions: questions.map((q, index) => ({
-                id: index + 1,
                 Question: q.question,
                 Answer: q.answer
             }))
         };
 
-        // Proceed with saving logic...
-        const key = `${topic.replace(/ /g, "_")}_flashcard`;
+        const key = id;
         const flashCardsStr = JSON.stringify(flashCards);
         localStorage.setItem(key, flashCardsStr);
 
-        // Update the list of flashcard set keys
         const keys = JSON.parse(localStorage.getItem('flashcardKeys') || '[]');
-        if (!keys.includes(key)) {
-            keys.push(key);
-            localStorage.setItem('flashcardKeys', JSON.stringify(keys));
-        }
+        keys.push(key);
+        localStorage.setItem('flashcardKeys', JSON.stringify(keys));
 
         alert("Flashcards saved successfully!");
     };
@@ -93,19 +92,19 @@ export default function Create() {
                 <div className="grid grid-cols-3 gap-4 pt-2">
                     <button
                         onClick={addQuestion}
-                        className="bg-accent p-2 rounded hover:bg-primary transition duration-300"
+                        className="border border-white bg-accent p-2 rounded hover:bg-primary transition duration-300"
                     >
                         Add Question
                     </button>
                     <button
                         onClick={removeLastQuestion}
-                        className="bg-red-500 p-2 rounded hover:bg-red-700 transition duration-300"
+                        className="border border-white bg-red-500 p-2 rounded hover:bg-red-700 transition duration-300"
                     >
                         Remove Last Question
                     </button>
                     <button
                         onClick={saveFlashCards}
-                        className={`bg-accent p-2 rounded ${!canSave() ? "bg-gray-400" : "hover:bg-primary transition duration-300"}`}
+                        className={`border border-white  p-2 rounded ${!canSave() ? "bg-gray-400" : "hover:bg-primary bg-green-700 transition duration-300"}`}
                         disabled={!canSave()}
                     >
                         Save FlashCards
