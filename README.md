@@ -20,18 +20,19 @@
 
 <h3>Features</h3>
 <ul>
-  <li>[X] Responsive UI</li>
-  <li>[X] User-Friendly FlashCard Creation</li>
-  <li>[X] FlashCards Saved to Local Storage</li>
-  <li>[X] Traversal through FlashCards.</li>
-  <li>[ ] Make UI more friendly and appealing for users to have a better experience.</li>
+  <li>Responsive UI</li>
+  <li>User-Friendly FlashCard Creation</li>
+  <li>FlashCards Saved to Local Storage</li>
+  <li>Traversal through FlashCards.</li>
 </ul>
 
 <h3>Planned Features</h3>
 <ul>
   <li>[ ] Complete Onboarding Page</li>
   <li>[ ] Make UI more friendly and appealing for users to have a better experience.</li>
-  <li>[ ] Ability to Import questions through JSON</li>
+  <li>[ ] Ability to Import questions through JSON.</li>
+  <li>[ ] Ability to Edit Existing FlashCards and Add/Remove Questions.</li>
+  <li>[ ] Button to turnover card, for users not familiar with the idea of clicking the card.</li>
 </ul>
 
 <!--
