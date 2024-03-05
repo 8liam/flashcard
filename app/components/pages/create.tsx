@@ -1,14 +1,12 @@
 "use client"
 import { useState } from "react";
 
-
 export default function Create() {
     const [topic, setTopic] = useState("");
     const [questions, setQuestions] = useState([{ question: "", answer: "" }]);
 
     const addQuestion = () => {
-        const newQuestion = { question: "", answer: "" };
-        setQuestions([...questions, newQuestion]);
+        setQuestions([...questions, { question: "", answer: "" }]);
     };
 
     const handleChange = (index: number, field: 'question' | 'answer', value: any) => {
@@ -17,9 +15,24 @@ export default function Create() {
         setQuestions(newQuestions);
     };
 
-    const isAddButtonDisabled = questions[questions.length - 1].question === "" || questions[questions.length - 1].answer === "";
+    const removeLastQuestion = () => {
+        if (questions.length > 1) {
+            setQuestions(questions.slice(0, -1));
+        } else {
+            alert("You must have at least one question.");
+        }
+    };
+
+    const canSave = () => {
+        return topic.trim() !== "" && !questions.some(q => q.question.trim() === "" || q.answer.trim() === "");
+    };
 
     const saveFlashCards = () => {
+        if (!canSave()) {
+            alert("Please fill in all fields before saving.");
+            return;
+        }
+
         const flashCards = {
             title: topic,
             questions: questions.map((q, index) => ({
@@ -28,10 +41,10 @@ export default function Create() {
                 Answer: q.answer
             }))
         };
-        const flashCardsStr = JSON.stringify(flashCards);
-        const key = `${topic.replace(/ /g, "_")}_flashcard`;
 
-        // Save the flashcard set
+        // Proceed with saving logic...
+        const key = `${topic.replace(/ /g, "_")}_flashcard`;
+        const flashCardsStr = JSON.stringify(flashCards);
         localStorage.setItem(key, flashCardsStr);
 
         // Update the list of flashcard set keys
@@ -40,17 +53,8 @@ export default function Create() {
             keys.push(key);
             localStorage.setItem('flashcardKeys', JSON.stringify(keys));
         }
-        const fileName = `${topic.replace(/ /g, "_")}_flashcards.json`;
-        const jsonStr = JSON.stringify(flashCards, null, 2);
-        const blob = new Blob([jsonStr], { type: "application/json" });
-        const href = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = href;
-        link.download = fileName;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(href);
+
+        alert("Flashcards saved successfully!");
     };
 
     return (
@@ -67,7 +71,7 @@ export default function Create() {
                 </div>
 
                 {questions.map((question, index) => (
-                    <div key={index} className={`grid grid-cols-1 space-y-2 ${index < questions.length - 1 ? "pb-4 mb-4 border-b-2 border-gray-200" : ""}`}>
+                    <div key={index} className="grid grid-cols-1 space-y-2">
                         <div className="space-y-2">
                             <h1>Question {index + 1}</h1>
                             <input
@@ -86,18 +90,23 @@ export default function Create() {
                         </div>
                     </div>
                 ))}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-3 gap-4 pt-2">
                     <button
                         onClick={addQuestion}
-                        className={`bg-accent p-2 mx-auto rounded ${isAddButtonDisabled ? "bg-gray-400" : ""}`}
-                        disabled={isAddButtonDisabled}
+                        className="bg-accent p-2 rounded hover:bg-primary transition duration-300"
                     >
                         Add Question
                     </button>
                     <button
+                        onClick={removeLastQuestion}
+                        className="bg-red-500 p-2 rounded hover:bg-red-700 transition duration-300"
+                    >
+                        Remove Last Question
+                    </button>
+                    <button
                         onClick={saveFlashCards}
-                        className="bg-accent p-2 mx-auto rounded"
-                        disabled={questions.length === 0 || topic.trim() === ""}
+                        className={`bg-accent p-2 rounded ${!canSave() ? "bg-gray-400" : "hover:bg-primary transition duration-300"}`}
+                        disabled={!canSave()}
                     >
                         Save FlashCards
                     </button>
@@ -106,3 +115,4 @@ export default function Create() {
         </main>
     );
 }
+
