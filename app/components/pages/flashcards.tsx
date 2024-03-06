@@ -48,7 +48,7 @@ export default function FlashCards() {
 
             ) : (
                 <div className='text-center space-y-4'>
-                    <h1 className='text-3xl font-semibold mb-4'>You have {flashcardSets.length} FlashCards</h1>
+                    <h1 className='text-3xl font-semibold mb-4'>You have no FlashCards</h1>
                     <a className="mt-4 bg-accent p-2 rounded text-xl font-light border border-white duration-300 hover:bg-black" href='/create'>Click here to Create FlashCards</a>
                 </div>
             )}
