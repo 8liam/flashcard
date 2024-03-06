@@ -1,6 +1,6 @@
 export default function Navbar() {
     return (
-        <nav className="xl:px-[20vw] lg:px-[15vw] md:px-[5vw] px-[2vw] bg-primary text-white p-2">
+        <nav className="xl:px-[20vw] lg:px-[15vw] md:px-[5vw] px-[2vw] text-white p-2">
             <div className="max-w-6xl mx-auto flex justify-between items-center">
                 <a href="/" className="text-lg font-semibold">
                     FlashCards
