@@ -22,7 +22,7 @@ export default function Onboarding() {
                 </div>
                 <div className="text-text hover:border-white border border-black p-2 rounded duration-300">
                     <h1 className="text-2xl font-semibold">Update FlashCards</h1>
-                    <p className="text-gray-300">Missed some content? Don't Worry. You can update your flashcard stack through the view page.</p>
+                    <p className="text-gray-300">Missed some content? Don&apos;t Worry. You can update your flashcard stack through the view page.</p>
                 </div>
             </div>
             <div className="grid grid-cols-2 md:mx-24 text-center gap-8">
