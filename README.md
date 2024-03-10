@@ -29,6 +29,7 @@
   <li>Traversal through FlashCards.</li>
   <li>Button to turnover card, for users not familiar with the idea of clicking the card.</li>
 <li>Ability to Edit Existing FlashCards and Add/Remove Questions.</li>
+	<li>Statistics Tracking for Study Efficiency Information</li>
 </ul>
 
 <h3>Planned Features</h3>
@@ -36,9 +37,12 @@
   <li>[X] Complete Onboarding Page</li>
   <li>[X] Make UI more friendly and appealing for users to have a better experience.</li>
   <li>[ ] Ability to Import questions through JSON.</li>
-  <li>[ ] Measure study statistics (How many times x question has been studied).</li>
+	<li>[ ] Jump to Card Ability for easy navigation</li>
+	<li>[X] Measure study statistics (How many times x question has been studied).</li>
+  
 </ul>
 
+![New Feature: Study Stats](https://i.imgur.com/3sDnn7q.png)
 <!--
 <h3>Bugs to Fix</h3>
 <ul>
